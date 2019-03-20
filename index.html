@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>HRI Card Game</title>
+  <meta name="keywords" content="HRI, Card Game, Trust, Robot" />
+  <meta name="description" content="HRI Card Game" />
+  <meta name="author" content="Steven Li" />
+  <meta name="copyright" content="Steven Li" />
+  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+
+</head>
+
+<body>
+  <div id="projects">
+    <div class="grid">
+      <div class="projects">
+        <div class="project ">
+          <div class="mask">
+            <div class="back" id="c1">1</div>
+            <div class="front"><span></span></div>
+          </div>
+        </div>
+        <div class="project ">
+          <div class="mask">
+            <div class="back" id="c2">2</div>
+            <div class="front"><span></span></div>
+          </div>
+        </div>
+        <div class="aniwz ">
+          <div class="text">Card Game</div>
+        </div>
+        <div class="controls">
+          <span class="bottom"></span>
+          <span class="bottom"></span>
+          <span class="bottom"></span>
+          <div class="mask">
+            <div class="text start">START</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var count = 0;
+    var cardlist = [['1', '0'],['a', 'b'],['@', '#'],['100', '80'],['hi', 'go']];
+
+    $(function () {
+      $('.controls').click(function () {
+        if ($(this).hasClass('show')) {
+          $(this).removeClass('show');
+          $('.start').html('START');
+          subMove();
+        } else {
+          $(this).addClass('show');
+          $('.start').html('RESET');
+          count++;
+          addMove();
+        }
+      })
+
+      $('.project').click(function () {
+        if ($(this).hasClass('flipped')) {
+          console.log("Already Flipped");
+        } else {
+          var num = $(this).index();
+          $('.bg_main input').val(num);
+          $('.ani' + num).addClass('flipped');
+        }
+      })
+    })
+
+    function addMove() {
+      $('.project').each(function (index, item) {
+        setTimeout(function () {
+          $(item).addClass('ani' + index);
+        }, index * 300);
+        if (count >= cardlist.length) {
+          document.getElementById('c' + (index+1)).innerHTML = Math.floor(Math.random() * 10);
+        } else {
+        document.getElementById('c' + (index+1)).innerHTML = cardlist[count][index];
+        }
+      })
+    }
+
+    function subMove() {
+      $('.project').each(function (index, item) {
+        $('.project').removeClass('flipped');
+        $(item).removeClass('ani' + index);
+      })
+    }
+  </script>
+
+</body>
+
+</html>
