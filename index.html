@@ -46,7 +46,7 @@
 
   <script type="text/javascript">
     var count = 0;
-    var cardlist = [['1', '0'],['a', 'b'],['@', '#'],['100', '80'],['hi', 'go']];
+    var cardlist = [['A', 'J'],['J', 'A'],['J', 'A'],['A', 'J'],['J', 'A']];
 
     $(function () {
       $('.controls').click(function () {
@@ -79,7 +79,7 @@
           $(item).addClass('ani' + index);
         }, index * 300);
         if (count >= cardlist.length) {
-          document.getElementById('c' + (index+1)).innerHTML = Math.floor(Math.random() * 10);
+          document.getElementById('c' + (index+1)).innerHTML = cardlist[Math.floor(Math.random()) * 4][index];
         } else {
         document.getElementById('c' + (index+1)).innerHTML = cardlist[count][index];
         }
