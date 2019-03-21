@@ -81,7 +81,7 @@
         if (count >= cardlist.length) {
           document.getElementById('c' + (index+1)).innerHTML = cardlist[Math.floor(Math.random()) * 4][index];
         } else {
-        document.getElementById('c' + (index+1)).innerHTML = cardlist[count][index];
+        document.getElementById('c' + (index+1)).innerHTML = cardlist[count-1][index];
         }
       })
     }
