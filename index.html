@@ -99,13 +99,22 @@
     var result = "SEL "
     var score = 0;
     var correct = [0, 2, 5, 6, 9];
+
     $(function () {
       $('.controls').click(function () {
         if ($(this).hasClass('show')) {
-          $(this).removeClass('show');
-          $('.start').html('SCORE '+score);
-          count = 5;
-          subMove();
+          selected = 0;
+          $('.project').each(function (index, item) {
+            if(index == 8 || index == 9) {
+              if($(item).find('.back').hasClass('bshadow')){selected=1;}
+            }
+          })
+          if(selected == 1) {
+            $(this).removeClass('show');
+            $('.start').html('SCORE '+score);
+            count = 5;
+            subMove();
+          }
         } else {
           if (count == 4) {
             $(this).addClass('show');
