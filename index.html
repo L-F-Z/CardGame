@@ -111,8 +111,19 @@
             $(this).addClass('show');
             $('.start').html('SHOW');
           }
-          addMove();
-          count++;
+          var selected = 1;
+          if(count!=0){
+            selected = 0;
+            $('.project').each(function (index, item) {
+              if(index == 2*count-1 || index == 2*count-2) {
+                if($(item).find('.back').hasClass('bshadow')){selected=1;}
+              }
+            })
+          }
+          if(selected == 1) {
+            addMove();
+            count++;
+          }
         }
       })
 
