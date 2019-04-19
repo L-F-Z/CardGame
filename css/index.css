@@ -3,11 +3,10 @@ body{background-color: #b8b2b2;}
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    font-family: 'Microsoft Yahei';
+    font-family: 'Serif';
 }
 html,body{height: 100%;width: 100%;margin:0;padding: 0;}
 
-#projects .grid {}
 #projects {
     background-color: #b8b2b2;
     overflow: hidden;
@@ -110,17 +109,57 @@ div.projects .controls:hover .bottom {
 
 
 .project.ani0 {
-    right: 711px;
-    bottom: 160px;
+    right: 751px;
+    bottom: 400px;
 }
 .project.ani1 {
+    right: 514px;
+    bottom: 400px;
+}
+.project.ani2 {
+    right: 731px;
+    bottom: 300px;
+}
+.project.ani3 {
+    right: 494px;
+    bottom: 300px;
+}
+.project.ani4 {
+    right: 711px;
+    bottom: 200px;
+}
+.project.ani5 {
     right: 474px;
-    bottom: 160px;
+    bottom: 200px;
+}
+.project.ani6 {
+    right: 691px;
+    bottom: 100px;
+}
+.project.ani7 {
+    right: 454px;
+    bottom: 100px;
+}
+.project.ani8 {
+    right: 671px;
+    bottom: 000px;
+}
+.project.ani9 {
+    right: 434px;
+    bottom: 000px;
 }
 
-.project span{display: inline-block;border-radius: 50%;width: 160px;height: 160px;margin-top: 75px;}
-.project.ani0 span{background: #ffde00;}
-.project.ani1 span{background: #ffde00;}
+.project span{display: inline-block;width: 180px;height: 269px;}
+.project.ani0 span{background: url(../img/A.png) no-repeat;}
+.project.ani1 span{background: url(../img/J.png) no-repeat;}
+.project.ani2 span{background: url(../img/A.png) no-repeat;}
+.project.ani3 span{background: url(../img/J.png) no-repeat;}
+.project.ani4 span{background: url(../img/J.png) no-repeat;}
+.project.ani5 span{background: url(../img/A.png) no-repeat;}
+.project.ani6 span{background: url(../img/A.png) no-repeat;}
+.project.ani7 span{background: url(../img/J.png) no-repeat;}
+.project.ani8 span{background: url(../img/J.png) no-repeat;}
+.project.ani9 span{background: url(../img/A.png) no-repeat;}
 
 .aniwz {
     width: 222px;
@@ -143,6 +182,11 @@ div.projects .controls:hover .bottom {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+.project .back.bshadow, .project .front.fshadow {
+    box-shadow:0px 0px 5px 10px #fefa01;
+}
+
 .project .back {
     background: url(../img/project_back_bg.png) no-repeat;
     display: -webkit-box;
