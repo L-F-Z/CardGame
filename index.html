@@ -6,9 +6,10 @@
   <title>HRI Card Game</title>
   <meta name="keywords" content="HRI, Card Game, Trust, Robot" />
   <meta name="description" content="HRI Card Game" />
-  <meta name="author" content="Steven Li" />
-  <meta name="copyright" content="Steven Li" />
+  <meta name="author" content="Fengzhi Li" />
+  <meta name="copyright" content="Fengzhi Li" />
   <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="js/FileSaver.js"></script>
   <link rel="stylesheet" type="text/css" href="css/index.css">
 
 </head>
@@ -19,25 +20,74 @@
       <div class="projects">
         <div class="project ">
           <div class="mask">
-            <div class="back" id="c1">1</div>
-            <div class="front"><span></span></div>
+            <div class="back" id="c0"><span></span></div>
+            <div class="front"></div>
           </div>
         </div>
         <div class="project ">
           <div class="mask">
-            <div class="back" id="c2">2</div>
-            <div class="front"><span></span></div>
+            <div class="back" id="c1"><span></span></div>
+            <div class="front"></div>
+          </div>
+        </div>
+        <div class="project ">
+          <div class="mask">
+            <div class="back" id="c2"><span></span></div>
+            <div class="front"></div>
+          </div>
+        </div>
+        <div class="project ">
+          <div class="mask">
+            <div class="back" id="c3"><span></span></div>
+            <div class="front"></div>
+          </div>
+        </div>
+        <div class="project ">
+          <div class="mask">
+            <div class="back" id="c4"><span></span></div>
+            <div class="front"></div>
+          </div>
+        </div>
+        <div class="project ">
+          <div class="mask">
+            <div class="back" id="c5"><span></span></div>
+            <div class="front"></div>
+          </div>
+        </div>
+        <div class="project ">
+          <div class="mask">
+            <div class="back" id="c6"><span></span></div>
+            <div class="front"></div>
+          </div>
+        </div>
+        <div class="project ">
+          <div class="mask">
+            <div class="back" id="c7"><span></span></div>
+            <div class="front"></div>
+          </div>
+        </div>
+        <div class="project ">
+          <div class="mask">
+            <div class="back" id="c8"><span></span></div>
+            <div class="front"></div>
+          </div>
+        </div>
+        <div class="project ">
+          <div class="mask">
+            <div class="back" id="c9"><span></span></div>
+            <div class="front"></div>
           </div>
         </div>
         <div class="aniwz ">
-          <div class="text">Card Game</div>
+          <div class="text">ID Number</div>
+          <input type="text" id="idx" placeholder="NA" style="font-size:20px; text-align:center; width:100px; height:40px;"/>
         </div>
         <div class="controls">
           <span class="bottom"></span>
           <span class="bottom"></span>
           <span class="bottom"></span>
           <div class="mask">
-            <div class="text start">START</div>
+            <div class="text start">DEAL</div>
           </div>
         </div>
       </div>
@@ -46,51 +96,62 @@
 
   <script type="text/javascript">
     var count = 0;
-    var cardlist = [['A', 'J'],['J', 'A'],['J', 'A'],['A', 'J'],['J', 'A']];
-
+    var result = "SEL "
+    var score = 0;
+    var correct = [0, 2, 5, 6, 9];
     $(function () {
       $('.controls').click(function () {
         if ($(this).hasClass('show')) {
           $(this).removeClass('show');
-          $('.start').html('START');
+          $('.start').html('SCORE '+score);
+          count = 5;
           subMove();
         } else {
-          $(this).addClass('show');
-          $('.start').html('RESET');
-          count++;
+          if (count == 4) {
+            $(this).addClass('show');
+            $('.start').html('SHOW');
+          }
           addMove();
+          count++;
         }
       })
 
       $('.project').click(function () {
-        if ($(this).hasClass('flipped')) {
-          console.log("Already Flipped");
-        } else {
-          var num = $(this).index();
-          $('.bg_main input').val(num);
-          $('.ani' + num).addClass('flipped');
+        var num = $(this).index();
+        var ok = 0;
+        if (num == 2*count-1 || num == 2*count-2) {ok = 1;} 
+        $('.project').each(function (index, item) {
+          if(index == 2*count-1 || index == 2*count-2) {
+            if($(item).find('.back').hasClass('bshadow')){ok=0;}
+          }
+        })
+        if(!ok){console.log("error"); return;}
+        $('.bg_main input').val(num);
+        $(this).find('.back').addClass('bshadow');
+        $(this).find('.front').addClass('fshadow');
+        result += num + " ";
+        if(correct.includes(num)) {
+          score ++;
         }
       })
     })
 
     function addMove() {
       $('.project').each(function (index, item) {
-        setTimeout(function () {
-          $(item).addClass('ani' + index);
-        }, index * 300);
-        if (count >= cardlist.length) {
-          document.getElementById('c' + (index+1)).innerHTML = cardlist[Math.floor(Math.random()) * 4][index];
-        } else {
-        document.getElementById('c' + (index+1)).innerHTML = cardlist[count-1][index];
+        if (index == 2*count || index == 2*count+1) {
+          setTimeout(function () {
+            $(item).addClass('ani' + index);
+          }, (index - 2*count) * 300);
         }
       })
     }
 
     function subMove() {
       $('.project').each(function (index, item) {
-        $('.project').removeClass('flipped');
-        $(item).removeClass('ani' + index);
+        $('.project').addClass('flipped');
       })
+      var blob = new Blob([result + " | SCORE = " + score], {type: "text/plain;charset=utf-8"});
+      saveAs(blob, "ID-" + (document.getElementById("idx").value || document.getElementById("idx").placeholder) + ".txt");
     }
   </script>
 
