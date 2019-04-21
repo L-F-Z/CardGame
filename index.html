@@ -99,9 +99,11 @@
   <script type="text/javascript">
     var count = 0;
     var result = "SEL "
+    var timestep = "TIME "
     var score = 0;
     var correct = [0, 2, 5, 6, 9];
-
+    var d = new Date();
+    timestep += '[START]-'+d.getTime()+' | ';
     $(function () {
       $('.controls').click(function () {
         if ($(this).hasClass('show')) {
@@ -114,6 +116,7 @@
           if(selected == 1) {
             $(this).removeClass('show');
             $('.start').html('SCORE '+score);
+            timestep += '[SCORE]-'+d.getTime()+' | ';
             count = 100;
             subMove();
           }
@@ -135,12 +138,14 @@
           if(selected == 1) {
             addMove();
             count++;
+            timestep += '[DEAL ROUND '+ count + ']-'+d.getTime()+' | ';
           }
         }
       })
 
       $('.project').click(function () {
         var num = $(this).index();
+        timestep += '[CLICK CARD '+ num + ']-'+d.getTime()+' | ';
         var ok = 0;
         if (num == 2*count-1 || num == 2*count-2) {ok = 1;} 
         $('.project').each(function (index, item) {
@@ -181,7 +186,7 @@
         $(item).addClass('ani' + index);
         $('.project').addClass('flipped');
       })
-      var blob = new Blob([result + " | SCORE = " + score], {type: "text/plain;charset=utf-8"});
+      var blob = new Blob([result + " | SCORE = " + score + '\r\n' + timestep], {type: "text/plain;charset=utf-8"});
       saveAs(blob, "ID-" + (document.getElementById("idx").value || document.getElementById("idx").placeholder) + ".txt");
     }
   </script>
