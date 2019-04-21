@@ -171,6 +171,16 @@ div.projects .controls:hover .bottom {
     text-align: center;
     font-size: 32px;
 }
+.rounds {
+    width: 222px;
+    height: 311px;
+    position: absolute;
+    right: 0px;
+    bottom: 180px;
+    margin: 0 0 15px 15px;
+    text-align: center;
+    font-size: 40px;
+}
 .text{padding-top: 110px;}
 .start{padding-top: 130px;}
 .project .front {
